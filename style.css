@@ -809,3 +809,58 @@ footer {
         backdrop-filter: none !important;
     }
 }
+/* УНИВЕРСАЛЬНЫЕ СТИЛИ ДЛЯ ЛЮБЫХ ФОТО */
+.about-image,
+.place-image,
+.feature-image,
+.food-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-image img,
+.place-image img,
+.feature-image img,
+.food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Фиксированные высоты для консистентности */
+.about-image { height: 400px; }
+.place-image { height: 250px; }
+.feature-image { height: 200px; }
+.food-image { height: 200px; }
+
+/* Заглушки если фото не грузятся */
+.about-image::before,
+.place-image::before,
+.feature-image::before,
+.food-image::before {
+    content: '📷 Фото загружается...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #b0b0b0;
+    font-size: 1rem;
+    z-index: 1;
+    display: none;
+}
+
+.about-image img[src=""],
+.place-image img[src=""],
+.feature-image img[src=""],
+.food-image img[src=""] {
+    display: none;
+}
+
+.about-image img[src=""] ~ ::before,
+.place-image img[src=""] ~ ::before,
+.feature-image img[src=""] ~ ::before,
+.food-image img[src=""] ~ ::before {
+    display: block;
+}
