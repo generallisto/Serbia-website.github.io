@@ -844,4 +844,20 @@ footer {
 /* Анимация перехода между секциями */
 .section-transition {
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+} 
+* Гарантированный фон для всех устройств */
+html, body {
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a1e1e 100%) !important;
+    background-attachment: fixed !important;
+}
+
+/* Отключить возможные переопределения */
+@media (min-width: 769px) {
+    body {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a1e1e 100%) !important;
+    }
 }
