@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сербия - Жемчужина Балкан</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --surface-dark: #1a1a1a;
+            --surface-medium: #2a2a2a;
+            --accent-gold: #d4af37;
+            --accent-warm: #8B4513;
+            --accent-earth: #8d6e63;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a1e1e 100%);
+            --gradient-card: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f7ef8a 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        /* Боковое меню */
+        .side-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.3);
+            box-shadow: 0 0 15px var(--accent-gold);
+        }
+
+        .nav-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background: var(--surface-medium);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+            right: 20px;
+        }
+
+        .nav-dot:nth-child(1)::after { content: 'О Сербии'; }
+        .nav-dot:nth-child(2)::after { content: 'Культура'; }
+        .nav-dot:nth-child(3)::after { content: 'Достопримечательности'; }
+        .nav-dot:nth-child(4)::after { content: 'Байина Башта'; }
+        .nav-dot:nth-child(5)::after { content: 'Кухня'; }
+        .nav-dot:nth-child(6)::after { content: 'Факты'; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            z-index: 900;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            font-family: 'Playfair Display', serif;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); }
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--gradient-gold);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .serbia-image {
+            width: 100%;
+            height: 400px;
+            background: var(--gradient-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .serbia-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Culture Section */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .culture-card {
+            background: var(--gradient-card);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .culture-card:hover::before {
+            left: 100%;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .culture-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .culture-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .culture-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Places Section */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .place-card {
+            background: var(--gradient-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .place-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .place-image {
+            height: 200px;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .place-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        .place-card-content {
+            padding: 1.5rem;
+        }
+
+        .place-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .place-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .place-meta {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* Bajina Basta Section */
+        .bajina-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .bajina-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .bajina-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: var(--gradient-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-gold);
+        }
+
+        .feature h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .bajina-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            height: 150px;
+            background: var(--gradient-card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent-gold);
+            color: var(--text-primary);
+        }
+
+        /* Food Section */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .food-card {
+            background: var(--gradient-card);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .food-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .food-card:hover::before {
+            left: 100%;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-warm);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .food-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .food-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .price-conversion {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Facts Section */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .fact-card {
+            background: var(--gradient-card);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .fact-card:hover::before {
+            left: 100%;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .fact-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconSpin 4s linear infinite;
+        }
+
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .fact-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .fact-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-subtitle {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .credits {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .credits p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .easter-egg {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .easter-egg:hover {
+            opacity: 1;
+        }
+
+        /* Анимации появления */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .side-nav {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .bajina-content {
+                grid-template-columns: 1fr;
+            }
+
+            .bajina-gallery,
+            .bajina-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Дополнительные улучшения */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--gradient-card);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Анимации для эмодзи */
+        .emoji-animation {
+            animation: emojiJump 2s ease-in-out infinite;
+        }
+
+        @keyframes emojiJump {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-15px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-7px) scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Анимация перехода между секциями */
+        .section-transition {
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+    </style>
+</head>
+<body>
+    <!-- Боковое меню навигации -->
+    <div class="side-nav">
+        <div class="nav-dot active" data-section="about"></div>
+        <div class="nav-dot" data-section="culture"></div>
+        <div class="nav-dot" data-section="places"></div>
+        <div class="nav-dot" data-section="bajina-basta"></div>
+        <div class="nav-dot" data-section="food"></div>
+        <div class="nav-dot" data-section="facts"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">🇷🇸 Сербия</div>
+            <ul class="nav-links">
+                <li><a href="#about">О стране</a></li>
+                <li><a href="#culture">Культура</a></li>
+                <li><a href="#places">Достопримечательности</a></li>
+                <li><a href="#bajina-basta">Байина Башта</a></li>
+                <li><a href="#food">Кухня</a></li>
+                <li><a href="#facts">Факты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero active">
+        <div class="container">
+            <div class="hero-content fade-in visible">
+                <h1>Сербия</h1>
+                <p>Жемчужина Балканского полуострова с богатой историей и гостеприимными людьми</p>
+                <a href="#about" class="cta-button">
+                    <i class="fas fa-compass"></i>
+                    Исследовать Сербию
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in visible">О Сербии</h2>
+            <p class="section-subtitle fade-in visible">Узнайте о стране, где встречаются Восток и Запад</p>
+            <div class="about-content">
+                <div class="about-text fade-in visible">
+                    <p>Сербия — удивительная страна в самом сердце Балкан, где переплетаются восточная и западная культуры, создавая уникальную атмосферу гостеприимства и радушия.</p>
+                    <p><strong>Столица:</strong> Белград — один из старейших городов Европы, стоящий на слиянии рек Савы и Дуная. Это город с богатой историей, бурной ночной жизнью и неповторимым шармом.</p>
+                    <p><strong>Горы:</strong> Почти 70% территории Сербии — холмы и горы. Самые известные хребты: <strong>Копаоник</strong> (зимний спортивный центр), <strong>Тара</strong> (национальный парк с девственными лесами) и <strong>Златибор</strong> (популярный курорт с целебным воздухом).</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card fade-in visible">
+                            <div class="stat-number">8.7M</div>
+                            <div class="stat-label">Население</div>
+                        </div>
+                        <div class="stat-card fade-in visible">
+                            <div class="stat-number">88K км²</div>
+                            <div class="stat-label">Территория</div>
+                        </div>
+                        <div class="stat-card fade-in visible">
+                            <div class="stat-number">1150+</div>
+                            <div class="stat-label">Лет истории</div>
+                        </div>
+                        <div class="stat-card fade-in visible">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Объектов ЮНЕСКО</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image fade-in visible">
+                    <div class="serbia-image">
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;" class="emoji-animation">🏛️</div>
+                            <div>Белград - город на двух реках</div>
+                            <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Столица с 2400-летней историей</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="culture section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in">Культура и традиции</h2>
+            <p class="section-subtitle fade-in">Богатое наследие и уникальные обычаи сербского народа</p>
+            <div class="culture-grid">
+                <div class="culture-card fade-in">
+                    <i class="fas fa-music"></i>
+                    <h3>Музыка</h3>
+                    <p>Турбо-фолк и традиционные народные песни создают уникальный музыкальный ландшафт Сербии. От эпических гуслярских баллад до современной поп-музыки.</p>
+                </div>
+                <div class="culture-card fade-in">
+                    <i class="fas fa-dancing"></i>
+                    <h3>Танцы</h3>
+                    <p>Коло — традиционный круговой танец, символ единства и веселья на всех праздниках. Каждый регион имеет свои уникальные стили и костюмы.</p>
+                </div>
+                <div class="culture-card fade-in">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Фестивали</h3>
+                    <p>EXIT Festival в Нови-Саде — один из лучших европейских музыкальных фестивалей. Также популярны Гусие (трубаческий фестиваль) и BELGRADE BEER FEST.</p>
+                </div>
+                <div class="culture-card fade-in">
+                    <i class="fas fa-church"></i>
+                    <h3>Религия</h3>
+                    <p>Православные монастыри с уникальными фресками — культурное наследие ЮНЕСКО. Сербская Православная Церковь играет ключевую роль в жизни общества.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Places Section -->
+    <section id="places" class="places section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in">Достопримечательности</h2>
+            <p class="section-subtitle fade-in">Откройте для себя самые красивые места Сербии</p>
+            <div class="places-grid">
+                <div class="place-card fade-in">
+                    <div class="place-image">
+                        <span class="emoji-animation">🏰</span> Белградская крепость
+                    </div>
+                    <div class="place-card-content">
+                        <h3>Белградская крепость</h3>
+                        <p>Исторический комплекс с видом на слияние Савы и Дуная, символ многовековой истории Белграда. Включает Верхний и Нижний город, парк Калемегдан и множество музеев.</p>
+                        <div class="place-meta">📍 Белград | 🎫 Вход бесплатный | ⭐ 4.8/5</div>
+                    </div>
+                </div>
+                <div class="place-card fade-in">
+                    <div class="place-image">
+                        <span class="emoji-animation">⛪</span> Монастырь Жича
+                    </div>
+                    <div class="place-card-content">
+                        <h3>Монастырь Жича</h3>
+                        <p>Духовный центр сербского православия с XIII века, место коронации сербских королей. Известен своей уникальной красной окраской и великолепными фресками.</p>
+                        <div class="place-meta">📍 Кралево | 🎫 Пожертвование | ⭐ 4.9/5</div>
+                    </div>
+                </div>
+                <div class="place-card fade-in">
+                    <div class="place-image">
+                        <span class="emoji-animation">🏞️</span> Дьявольский город
+                    </div>
+                    <div class="place-card-content">
+                        <h3>Дьявольский город</h3>
+                        <p>Природный феномен из 202 земляных пирамид необычной формы. Согласно легенде, эти каменные столбы были созданы дьяволом. Уникальное геологическое образование.</p>
+                        <div class="place-meta">📍 Куршумлия | 🎫 ~300 динар | ⭐ 4.7/5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bajina Basta Section -->
+    <section id="bajina-basta" class="bajina-basta section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in">Байина Башта</h2>
+            <p class="section-subtitle fade-in">Жемчужина западной Сербии у подножия горы Тара</p>
+            <div class="bajina-content">
+                <div class="bajina-text">
+                    <p class="fade-in"><strong>Байина-Башта</strong> — очаровательный город на западе Сербии, расположенный у подножия горы Тара. Этот регион славится своей потрясающей природой и богатой историей.</p>
+                    <p class="fade-in">Главная достопримечательность — <strong>монастырь Рача</strong> XIV века, спрятанный в ущелье реки Рача. Монастырь известен своей школой переписчиков, которая сохраняла сербскую культуру во времена османского владычества.</p>
+                    <p class="fade-in">Природный заповедник <strong>Тара</strong> предлагает уникальные возможности для экотуризма, пеших походов и наблюдения за дикой природой. Обязательно посетите <strong>Дом на Дрине</strong> — крошечный домик на скале посреди реки, символ этого региона.</p>
+                    
+                    <div class="bajina-features">
+                        <div class="feature fade-in">
+                            <h4><span class="emoji-animation">🏔️</span> Гора Тара</h4>
+                            <p>Национальный парк с уникальной флорой и фауной, включая серн и медведей. Идеальное место для треккинга.</p>
+                        </div>
+                        <div class="feature fade-in">
+                            <h4><span class="emoji-animation">🏛️</span> Монастырь Рача</h4>
+                            <p>Духовный и культурный центр XIV века, шедевр сербской средневековой архитектуры с богатой библиотекой.</p>
+                        </div>
+                        <div class="feature fade-in">
+                            <h4><span class="emoji-animation">🚣</span> Река Дрина</h4>
+                            <p>Идеальное место для рафтинга и рыбалки. Известна своим изумрудным цветом воды и крутыми каньонами.</p>
+                        </div>
+                        <div class="feature fade-in">
+                            <h4><span class="emoji-animation">🌲</span> Природа</h4>
+                            <p>Чистейший воздух и девственные леса. Рай для фотографов и любителей природы с множеством маршрутов.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bajina-gallery">
+                    <div class="gallery-item fade-in"><span class="emoji-animation">🏔️</span> Гора Тара</div>
+                    <div class="gallery-item fade-in"><span class="emoji-animation">🚣</span> Река Дрина</div>
+                    <div class="gallery-item fade-in"><span class="emoji-animation">⛪</span> Монастырь Рача</div>
+                    <div class="gallery-item fade-in"><span class="emoji-animation">🏠</span> Дом на Дрине</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Section -->
+    <section id="food" class="food section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in">Сербская кухня</h2>
+            <p class="section-subtitle fade-in">Вкусные блюда по доступным ценам - гастрономический рай</p>
+            <div class="food-grid">
+                <div class="food-card fade-in">
+                    <h3>Ćevapi</h3>
+                    <p>Мясные колбаски с луком и лепешкой "сомун" - национальное блюдо номер один. Подается с каймаком (кисломолочный продукт) и уткой.</p>
+                    <div class="price">350-500 динар</div>
+                    <div class="price-conversion">(3-4€ / 300-400₽)</div>
+                </div>
+                <div class="food-card fade-in">
+                    <h3>Pljeskavica</h3>
+                    <p>Гигантская котлета-бургер с разнообразными начинками и соусами. "Лепенья" (лепешка) вместо булки обязательна!</p>
+                    <div class="price">400-600 динар</div>
+                    <div class="price-conversion">(3.5-5€ / 350-500₽)</div>
+                </div>
+                <div class="food-card fade-in">
+                    <h3>Ajvar</h3>
+                    <p>Икра из запеченных перцев — любимая национальная закуска к любому блюду. Бывает острая и сладкая.</p>
+                    <div class="price">200-300 динар</div>
+                    <div class="price-conversion">(1.7-2.5€ / 170-250₽)</div>
+                </div>
+                <div class="food-card fade-in">
+                    <h3>Rakija</h3>
+                    <p>Крепкий фруктовый бренди (45-50%) - традиционный алкогольный напиток. Вишневая (вильямовка) и сливовая (шливовица) — самые популярные.</p>
+                    <div class="price">150-300 динар</div>
+                    <div class="price-conversion">(1.3-2.5€ / 130-250₽)</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: var(--accent-gold); font-weight: 600; font-size: 1.1rem;">
+                    🍽️ <strong>Совет:</strong> Средний чек в ресторане — 1000-1500 динар (8-12€ / 800-1200₽) на человека
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facts Section -->
+    <section id="facts" class="facts section-transition">
+        <div class="container">
+            <h2 class="section-title fade-in">Факты и экономика</h2>
+            <p class="section-subtitle fade-in">Ключевая информация о стране для путешественников</p>
+            <div class="facts-grid">
+                <div class="fact-card fade-in">
+                    <i class="fas fa-landmark"></i>
+                    <h3>Столица</h3>
+                    <p><strong>Белград</strong> — один из древнейших городов Европы, постоянно населен с 4800 г. до н.э. Город на слиянии двух рек с богатой историей.</p>
+                </div>
+                <div class="fact-card fade-in">
+                    <i class="fas fa-users"></i>
+                    <h3>Население</h3>
+                    <p>Около <strong>6.7 млн</strong> человек (без Косово). Сербы составляют 83% населения. Высокий уровень гостеприимства и радушия.</p>
+                </div>
+                <div class="fact-card fade-in">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Валюта</h3>
+                    <p><strong>Сербский динар</strong> (RSD). ~1€ ≈ 117 RSD, ~1₽ ≈ 1.3 RSD. Российские рубли и евро можно легко обменять в любом банке.</p>
+                </div>
+                <div class="fact-card fade-in">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Экономика</h3>
+                    <p>Автомобилестроение (Fiat), IT, сельское хозяйство. Сербия — мировой лидер по экспорту малины и слив.</p>
+                </div>
+                <div class="fact-card fade-in">
+                    <i class="fas fa-plane"></i>
+                    <h3>Виза</h3>
+                    <p>Для граждан России и многих других стран <strong>виза не требуется</strong> до 30 дней. Нужен только загранпаспорт.</p>
+                </div>
+                <div class="fact-card fade-in">
+                    <i class="fas fa-futbol"></i>
+                    <h3>Спорт</h3>
+                    <p>Сербия — родина многих знаменитых спортсменов: Новак Джокович (теннис), Никола Йокич (баскетбол), водное поло (чемпионы мира).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">Сербия</div>
+                <div class="footer-subtitle">Страна с богатой историей и большим сердцем <span class="pulse">🇷🇸</span></div>
+                
+                <div style="margin: 2rem 0;">
+                    <p style="color: var(--text-secondary); font-size: 1rem;">
+                        "Слава Сербии! Živela Srbija! <span class="emoji-animation">🇷🇸</span>"
+                    </p>
+                </div>
+                
+                <div class="credits">
+                    <p><strong>Личный проект Generallisto</strong> - создано с любовью к Сербии и её культуре</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem;">Образовательный проект © 2025 | Все права защищены</p>
+                    
+                    <!-- Пасхалка -->
+                    <div class="easter-egg" onclick="this.innerHTML='🎉 Mein Stiefvater ist ein Ziegenbock! 🐐 (Das ist nur ein Scherz!)'">
+                        P.S. Für unsere deutschen Freunde 🇩🇪
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная навигация с анимациями
+        document.addEventListener('DOMContentLoaded', function() {
+            const navDots = document.querySelectorAll('.nav-dot');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            // Функция для плавного перехода к секции
+            function scrollToSection(sectionId) {
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    // Анимация перед переходом
+                    document.querySelectorAll('section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Плавный скролл
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Активация секции после перехода
+                    setTimeout(() => {
+                        targetSection.classList.add('active');
+                    }, 300);
+                }
+            }
+            
+            // Функция для обновления активной точки
+            function updateActiveDot() {
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.id;
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+                
+                navDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.dataset.section === currentSection) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+            
+            // Клик по точкам
+            navDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    scrollToSection(this.dataset.section);
+                });
+            });
+            
+            // Клик по навигационным ссылкам
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+            
+            // Анимация появления элементов
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Обновление активной точки при скролле
+            window.addEventListener('scroll', updateActiveDot);
+            updateActiveDot(); // Инициализация при загрузке
+
+            // Анимация для иконок при наведении
+            const icons = document.querySelectorAll('.culture-card i, .fact-card i');
+            icons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.animation = 'iconBounce 0.6s ease';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.animation = 'iconBounce 3s ease-in-out infinite';
+                });
+            });
+
+            // Автоматическая активация видимых секций
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+
+        // Дополнительные интерактивные эффекты
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.culture-card, .place-card, .fact-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+                    card.style.transform = `perspective(1000px) rotateX(${(y - rect.height/2)/20}deg) rotateY(${(x - rect.width/2)/20}deg) translateY(-5px)`;
+                } else {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
